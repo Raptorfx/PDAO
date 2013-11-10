@@ -16,8 +16,8 @@
 #include "Ogre/RTShaderSystem/OgreShaderExNormalMapLighting.h"
 #include "Ogre/RTShaderSystem/OgreShaderGenerator.h"
 
-#include "CEGUI.h"
-#include "RendererModules/Ogre/CEGUIOgreRenderer.h"
+//#include "CEGUI.h"
+//#include "RendererModules/Ogre/CEGUIOgreRenderer.h"
 
 #include "DAO_Application.h"
 #include "DAO_ResourceManager.h"
@@ -36,13 +36,13 @@ public:
 	inline Ogre::Camera* getCamera()const {return mainCamera_;}
     inline Ogre::SceneManager* getSceneManager()const {return sceneManager_;}
 	inline TerrainManager* getTerrainManager()const {return mTerrainManager_;}
-	
+
 
 
 	void createCamera();
     void createViewports();
     void createScene();
-	void initCEGUI();
+	//void initCEGUI();
 
 private:
 
@@ -55,9 +55,9 @@ private:
 
 	//TODO: gui will have an own class
 	//GUI
-	CEGUI::OgreRenderer* gui_renderer_;
+	//CEGUI::OgreRenderer* gui_renderer_;
 
-	
+
 };
 
 #endif

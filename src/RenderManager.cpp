@@ -51,13 +51,13 @@ void RenderManager::createViewports()
     mainCamera_->setAspectRatio(Ogre::Real(viewport_->getActualWidth()) / Ogre::Real(viewport_->getActualHeight()));
 }
 
-void RenderManager::initCEGUI()
+/*void RenderManager::initCEGUI()
 {
 	//Init the gui
 	gui_renderer_ = &CEGUI::OgreRenderer::bootstrapSystem();
 
 	CEGUI::Imageset::setDefaultResourceGroup("Imagesets");
-	CEGUI::Font::setDefaultResourceGroup("Fonts");	
+	CEGUI::Font::setDefaultResourceGroup("Fonts");
 	CEGUI::Scheme::setDefaultResourceGroup("Schemes");
 	CEGUI::WidgetLookManager::setDefaultResourceGroup("LookNFeel");
 	CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
@@ -67,8 +67,8 @@ void RenderManager::initCEGUI()
 	CEGUI::System::getSingleton().setDefaultMouseCursor("TaharezLook", "MouseArrow");
 
 	CEGUI::MouseCursor::getSingleton().setImage( CEGUI::System::getSingleton().getDefaultMouseCursor());
-	CEGUI::MouseCursor::getSingleton().setPosition(CEGUI::Point(CEGUI::Vector2(0,0))); 
-}
+	CEGUI::MouseCursor::getSingleton().setPosition(CEGUI::Point(CEGUI::Vector2(0,0)));
+}*/
 
 /*! \brief setup the scene
 *

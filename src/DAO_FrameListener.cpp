@@ -2,13 +2,16 @@
 
 template<> DAO_FrameListener* Ogre::Singleton<DAO_FrameListener>::msSingleton = 0;
 
-DAO_FrameListener::DAO_FrameListener(Ogre::RenderWindow* win, InputManager* inputManager, RenderManager* renderManager) :
+DAO_FrameListener::DAO_FrameListener(Ogre::RenderWindow* win) :
 		mWindow_(win),
 		frameDelay_(0.0),
 		exitRequested_(false)
 {
+    renderManager_ = new RenderManager();
+	renderManager_->createCamera();
+	renderManager_->createViewports();
 
-	gameContext_.reset(new GameContext(win, renderManager));
+	gameContext_.reset(new GameContext(win, renderManager_));
 
 	player_ = gameContext_->getPlayer();
 
@@ -19,9 +22,11 @@ DAO_FrameListener::DAO_FrameListener(Ogre::RenderWindow* win, InputManager* inpu
 	//mCamMode_ = CameraControlSystem::CameraMode::FirstPerson;
 	mCamMode_ = 1;
 
-	renderManager_ = renderManager;
+	//renderManager_ = renderManager;
 
-	inputManager_ = inputManager;
+
+	//inputManager_ = inputManager;
+	inputManager_ = new InputManager;
 
 	//ray_scene_query_ = app_->getSceneManager()->createRayQuery(Ogre::Ray());
 	//ray_scene_query_->setQueryMask(Ogre::SceneManager::WORLD_GEOMETRY_TYPE_MASK);
@@ -55,8 +60,8 @@ void DAO_FrameListener::windowResized(Ogre::RenderWindow* rw)
     ms.height = height;
 
     //Notify CEGUI that the display size has changed.
-    CEGUI::System::getSingleton().notifyDisplaySizeChanged(CEGUI::Size(
-            static_cast<float> (width), static_cast<float> (height)));
+    /*CEGUI::System::getSingleton().notifyDisplaySizeChanged(CEGUI::Size(
+            static_cast<float> (width), static_cast<float> (height)));*/
 }
 
 /*! \brief Unattach OIS before window shutdown (very important under Linux)
@@ -130,12 +135,12 @@ bool DAO_FrameListener::frameStarted(const Ogre::FrameEvent& evt)
 		std::pair<int,int> scale = mouse_listener_->getMoveScale();
 
 		Ogre::Ray mouseRay = cam_->getCameraToViewportRay(mouse_->getMouseState().X.abs / float(scale.first), mouse_->getMouseState().Y.abs / float(scale.second));
-		
+
 
 		std::cout << "MouseRay: " << mouseRay.getDirection() << mouseRay.getOrigin() << std::endl;
 		ray_scene_query_->setRay(mouseRay);
 		ray_scene_query_->setSortByDistance(true);
-	
+
 		Ogre::TerrainGroup::RayResult result = app_->getTerrainGroup()->rayIntersects( mouseRay );
 
 	}*/
@@ -156,7 +161,7 @@ bool DAO_FrameListener::frameStarted(const Ogre::FrameEvent& evt)
     }
 
 	//If an exit has been requested, start cleaning up.
-	if (exitRequested_) 
+	if (exitRequested_)
 	{
 		exitApplication();
 		return false;
@@ -169,15 +174,15 @@ bool DAO_FrameListener::frameStarted(const Ogre::FrameEvent& evt)
 
 void DAO_FrameListener::updateCharacterControl(const Ogre::FrameEvent& evt)
 {
-	if (player_) 
+	if (player_)
 	{
         player_->update (evt.timeSinceLastFrame, inputManager_->getKeyboard());
- 
-        if (cameraControl_) 
+
+        if (cameraControl_)
 		{
 			//float delta_angle = 0.0f;
 			Ogre::Vector4 mouse_data(0.0f, 0.0f, 0.0f, 0.0f);
-            switch (mCamMode_) 
+            switch (mCamMode_)
 			{
 				// 3rd person chase
 				case 1: //CameraControlSystem::CameraMode::ThirdPersonChase:
@@ -185,21 +190,21 @@ void DAO_FrameListener::updateCharacterControl(const Ogre::FrameEvent& evt)
 					if(inputManager_->isMouseButtonPressed(OIS::MB_Left) || inputManager_->isMouseButtonPressed(OIS::MB_Right))
 					{
 						//If visible, store the mouse position befor hiding, for reset
-						if(CEGUI::MouseCursor::getSingleton().isVisible())
+						/*if(CEGUI::MouseCursor::getSingleton().isVisible())
 						{
 							m_mouse_cursor_pos_ = CEGUI::MouseCursor::getSingleton().getPosition();
 						}
-						CEGUI::MouseCursor::getSingleton().hide();
-						
+						CEGUI::MouseCursor::getSingleton().hide();*/
+
 					}
 					else
 					{
 						//If cursor was invisible, restore the last position
-						if(!CEGUI::MouseCursor::getSingleton().isVisible())
+						/*if(!CEGUI::MouseCursor::getSingleton().isVisible())
 						{
 							CEGUI::MouseCursor::getSingleton().setPosition(m_mouse_cursor_pos_);
 						}
-						CEGUI::MouseCursor::getSingleton().show();
+						CEGUI::MouseCursor::getSingleton().show();*/
 
 						mouse_data.x = 0.0f;
 						mouse_data.y = 0.0f;
@@ -211,24 +216,24 @@ void DAO_FrameListener::updateCharacterControl(const Ogre::FrameEvent& evt)
 						mouse_data.x = 0.0f;
 					}
 
-				    cameraControl_->update(evt.timeSinceLastFrame, 
-                                        player_->getCameraNode()->_getDerivedPosition(), 
+				    cameraControl_->update(evt.timeSinceLastFrame,
+                                        player_->getCameraNode()->_getDerivedPosition(),
                                         player_->getSightNode()->_getDerivedPosition(),
 										mouse_data);
                     break;
 
 				// 3rd person fixed
 				case 2: //CameraControlSystem::CameraMode::ThirdPersonFixed:
-                    cameraControl_->update(evt.timeSinceLastFrame, 
-                                        Ogre::Vector3 (0, 200, 0), 
+                    cameraControl_->update(evt.timeSinceLastFrame,
+                                        Ogre::Vector3 (0, 200, 0),
                                         player_->getSightNode()->_getDerivedPosition(),
 										mouse_data);
                     break;
 
 				// 1st person
 				case 3: //CameraControlSystem::CameraMode::FirstPerson:
-                    cameraControl_->update(evt.timeSinceLastFrame, 
-                                        player_->getWorldPosition(), 
+                    cameraControl_->update(evt.timeSinceLastFrame,
+                                        player_->getWorldPosition(),
                                         player_->getSightNode()->_getDerivedPosition(),
 										mouse_data);
                     break;
@@ -242,14 +247,14 @@ bool DAO_FrameListener::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
 	/*Ogre::Vector3 playerPos = player_->getWorldPosition();
 	Ogre::Ray cameraRay(Ogre::Vector3(playerPos.x, 5000.0f, playerPos.z), Ogre::Vector3::NEGATIVE_UNIT_Y);
- 
+
 	mRaySceneQuery_->setRay(cameraRay);
 
 	// Perform the scene query
 	mRaySceneQuery_->setSortByDistance(false);
 	Ogre::RaySceneQueryResult &result = mRaySceneQuery_->execute();
 	Ogre::RaySceneQueryResult::iterator iter = result.begin();
- 
+
 	// Get the results, set the camera height
 	for (iter; iter != result.end(); iter++)
 	{

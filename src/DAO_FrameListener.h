@@ -32,7 +32,7 @@ class DAO_FrameListener :
         public Ogre::WindowEventListener
 {
 public:
-	DAO_FrameListener(Ogre::RenderWindow* win, InputManager* inputManager, RenderManager* renderManager);
+	DAO_FrameListener(Ogre::RenderWindow* win);
 	~DAO_FrameListener();
 
 	void requestExit();
@@ -72,7 +72,7 @@ private:
 	int mCamMode_;
 
 	//Store the mouse position for hide/show
-	CEGUI::Point m_mouse_cursor_pos_;
+	//CEGUI::Point m_mouse_cursor_pos_;
 
 	Ogre::RaySceneQuery*    mRaySceneQuery_;
 

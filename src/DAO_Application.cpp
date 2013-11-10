@@ -57,21 +57,24 @@ int DAO_Application::startup()
     logManager->setLogDetail(Ogre::LL_BOREME);
 
 	resMgr->loadResourceGroup("Base");
-	
+
 	//for CEGui
-	resMgr->loadResourceGroup("Imagesets");
+	/*resMgr->loadResourceGroup("Imagesets");
 	resMgr->loadResourceGroup("Fonts");
 	resMgr->loadResourceGroup("Schemes");
 	resMgr->loadResourceGroup("LookNFeel");
-	resMgr->loadResourceGroup("Layouts");
+	resMgr->loadResourceGroup("Layouts");*/
 
 	resMgr->loadResourceGroup("Mesh");
 	resMgr->loadResourceGroup("Sinbad");
 
+	//inputManager_ = new InputManager;
+
+
 	logManager->logMessage("*** Creating frame listener *** ", Ogre::LML_NORMAL);
-    //root_->addFrameListener(new DAO_FrameListener(window_));
-	StartupFrameListener* sfl = new StartupFrameListener(window_, root_);
-	root_->addFrameListener(sfl);
+    root_->addFrameListener(new DAO_FrameListener(window_));
+	//StartupFrameListener* sfl = new StartupFrameListener(window_, root_);
+	//root_->addFrameListener(sfl);
     logManager->logMessage("*** Frame listener created *** ", Ogre::LML_NORMAL);
 
 	//mainLoop();
@@ -79,8 +82,8 @@ int DAO_Application::startup()
 
 	try
     {
-        root_->startRendering();
-		//mainLoop();
+        //root_->startRendering();
+		mainLoop();
     }
     catch(Ogre::Exception& e)
     {

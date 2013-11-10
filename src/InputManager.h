@@ -66,7 +66,7 @@ private:
 	std::map<OIS::KeyCode, bool>		m_keyboard_store_;
 	std::map<OIS::MouseButtonID, bool>	m_mouse_id_store_;
 
-	CEGUI::MouseButton convertButton(OIS::MouseButtonID buttonID);
+	//CEGUI::MouseButton convertButton(OIS::MouseButtonID buttonID);
 
 	//New extra mouse movements
 	Ogre::Vector4 m_mouse_extra_data_;
