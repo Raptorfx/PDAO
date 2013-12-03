@@ -94,6 +94,13 @@ IF(MINGW)
 ENDIF(MINGW)
 
 IF(MSVC)
+
+    set(MSVC_RUNTIME "static")
+    foreach(variable ${variables})
+      if(${variable} MATCHES "/MD")
+        string(REGEX REPLACE "/MD" "/MT" ${variable} "${${variable}}")
+      endif()
+    endforeach()
     
     #BOOST
     
@@ -132,6 +139,12 @@ IF(MSVC)
     set(LIBS ${LIBS} Plugin_ParticleFX.lib)
     set(LIBS ${LIBS} Plugin_PCZSceneManager.lib)
     set(LIBS ${LIBS} RenderSystem_GL.lib)
+    
+    SET(OGRE_DEPENDENCY_DIR "" CACHE PATH "")
+    include_directories(${OGRE_DEPENDENCY_DIR}/include)
+    link_directories(${OGRE_DEPENDENCY_DIR}/lib/Release)
+    
+    set(LIBS ${LIBS} OIS.lib)
     
     SET(OGRE_PLUGIN_DIR "" CACHE PATH "")
 
