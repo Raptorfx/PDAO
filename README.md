@@ -1,6 +1,6 @@
 PDAO - Project Dark Ages Online
 ====
-How to build:
+How to build with Visual Studio 2013 (msvc110):
 
 Download Dependencies, Boost, Ogre and Addon from
 http://www.ogre3d.org/forums/viewtopic.php?t=69274
