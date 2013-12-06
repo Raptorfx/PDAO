@@ -1,6 +1,6 @@
 PDAO - Project Dark Ages Online
 ====
-How to build with Visual Studio 2013 (msvc110):
+How to build with Visual Studio 2012 (msvc110):
 
 Download from
 http://www.ogre3d.org/forums/viewtopic.php?t=69274
