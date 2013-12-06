@@ -27,6 +27,7 @@ int DAO_Application::startup()
 	//Random::initialize();
 
 	DAO_ResourceManager* resMgr = new DAO_ResourceManager;
+
 	root_ = new Ogre::Root(
             resMgr->getPluginsPath(),
             resMgr->getCfgFile(),

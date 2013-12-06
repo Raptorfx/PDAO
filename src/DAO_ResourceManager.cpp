@@ -17,8 +17,8 @@ const std::string DAO_ResourceManager::LOGFILENAME = "darkages.log";
 
 DAO_ResourceManager::DAO_ResourceManager(void) :
 		screenshotCounter_(0),
-        resourcePath_("../config/"),
-        homePath_("../config/"),
+        resourcePath_("config/"),
+        homePath_("config/"),
         pluginsPath_(""),
 		ogreCfgFile_(""),
         ogreLogFile_("")
@@ -43,28 +43,6 @@ void DAO_ResourceManager::initResources()
 	groupBase.addResource("FileSystem","../media/materials/textures");
 
 	resources_[groupBase.getName()] = groupBase;
-
-	//CEGUI ressources
-	ResourceGroup groupGuiImageSets("Imagesets");
-	groupGuiImageSets.addResource("FileSystem","../gui/imagesets");
-	resources_[groupGuiImageSets.getName()] = groupGuiImageSets;
-
-	ResourceGroup groupGuiFonts("Fonts");
-	groupGuiFonts.addResource("FileSystem","../gui/fonts");
-	resources_[groupGuiFonts.getName()] = groupGuiFonts;
-
-	ResourceGroup groupGuiSchemes("Schemes");
-	groupGuiSchemes.addResource("FileSystem","../gui/schemes");
-	resources_[groupGuiSchemes.getName()] = groupGuiSchemes;
-
-	ResourceGroup groupGuiLook("LookNFeel");
-	groupGuiLook.addResource("FileSystem","../gui/looknfeel");
-	resources_[groupGuiLook.getName()] = groupGuiLook;
-
-	ResourceGroup groupGuiLayouts("Layouts");
-	groupGuiLayouts.addResource("FileSystem","../gui/layouts");
-	resources_[groupGuiLayouts.getName()] = groupGuiLayouts;
-	//----
 
 	//Meshs
 	ResourceGroup groupMesh("Mesh");

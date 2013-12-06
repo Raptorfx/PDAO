@@ -22,11 +22,11 @@ public:
 	void setupResources();
 	void takeScreenshot();
 
-	inline const std::string& getResourcePath() const{return resourcePath_;}
-    inline const std::string& getHomePath() const{return homePath_;}
-    inline const std::string& getPluginsPath() const{return pluginsPath_;}
-	inline const std::string& getCfgFile() const{return ogreCfgFile_;}
-    inline const std::string& getLogFile() const{return ogreLogFile_;}
+	inline const std::string getResourcePath() const{return resourcePath_;}
+    inline const std::string getHomePath() const{return homePath_;}
+    inline const std::string getPluginsPath() const{return pluginsPath_;}
+	inline const std::string getCfgFile() const{return ogreCfgFile_;}
+    inline const std::string getLogFile() const{return ogreLogFile_;}
 
 private:
 	void initResources();

@@ -122,9 +122,9 @@ void TerrainManager::initBlendMaps(Ogre::Terrain* terrain)
  
             blendMap0->convertImageToTerrainSpace(x, y, &tx, &ty);
 
-            *pBlend0++ = Ogre::Math::Clamp((terrain->getHeightAtTerrainPosition(tx, ty) - minHeight0) / fadeDist0, Ogre::Real(0), Ogre::Real(1));;
- 
-            *pBlend1++ = Ogre::Math::Clamp((terrain->getHeightAtTerrainPosition(tx, ty) - minHeight1) / fadeDist1, Ogre::Real(0), Ogre::Real(1));
+			//TODO: Blending causes Access Violation
+            //*pBlend0++ = Ogre::Math::Clamp((terrain->getHeightAtTerrainPosition(tx, ty) - minHeight0) / fadeDist0, Ogre::Real(0), Ogre::Real(1));;
+            //*pBlend1++ = Ogre::Math::Clamp((terrain->getHeightAtTerrainPosition(tx, ty) - minHeight1) / fadeDist1, Ogre::Real(0), Ogre::Real(1));
 
             /*;
             Ogre::Real val = (height - minHeight0) / fadeDist0;
