@@ -41,8 +41,6 @@ InputManager::InputManager(void):
 	mRMouseDown_ = false;
 
 	m_mouse_extra_data_ = Ogre::Vector4(0.0f, 0.0f, 0.0f, 0.0f);
-
-
 }
 
 
@@ -68,19 +66,8 @@ bool InputManager::isMouseButtonPressed(OIS::MouseButtonID id)
 
 bool InputManager::mouseMoved(const OIS::MouseEvent &evt)
 {
-	//Inject event to GUI
-	//CEGUI::System &sys = CEGUI::System::getSingleton();
-	//sys.injectMouseMove(float(evt.state.X.rel), float(evt.state.Y.rel));
-	// Scroll wheel.
-	/*if (evt.state.Z.rel)
-	{
-		sys.injectMouseWheelChange(evt.state.Z.rel / 120.0f);
-	}*/
-
-    //TODO: Rework after remove of CEGUI
-
-	/*m_rel_angle_x_ = evt.state.X.rel / sys.getRenderer()->getDisplaySize().d_width;
-	m_rel_angle_y_ = evt.state.Y.rel / sys.getRenderer()->getDisplaySize().d_height;
+	m_rel_angle_x_ = (float)( (double)evt.state.X.rel / (double)DAO_Application::getSingleton().getWindow()->getViewport(0)->getActualWidth() );
+	m_rel_angle_y_ = (float)( (double)evt.state.Y.rel / (double)DAO_Application::getSingleton().getWindow()->getViewport(0)->getActualHeight());
 
 	m_mouse_extra_data_.x = m_rel_angle_x_;
 	m_mouse_extra_data_.y = m_rel_angle_y_;
@@ -93,48 +80,13 @@ bool InputManager::mouseMoved(const OIS::MouseEvent &evt)
 	move_height_ = evt.state.height;
 	move_width_ = evt.state.width;
 	x_abs_ = evt.state.X.abs;
-	y_abs_ = evt.state.Y.abs;*/
+	y_abs_ = evt.state.Y.abs;
 
 	return true;
 }
 
-/*CEGUI::MouseButton InputManager::convertButton(OIS::MouseButtonID buttonID)
-{
-    switch (buttonID)
-    {
-    case OIS::MB_Left:
-        return CEGUI::LeftButton;
-
-    case OIS::MB_Right:
-        return CEGUI::RightButton;
-
-    case OIS::MB_Middle:
-        return CEGUI::MiddleButton;
-
-    default:
-        return CEGUI::LeftButton;
-    }
-}*/
-
 bool InputManager::mousePressed(const OIS::MouseEvent &arg, OIS::MouseButtonID id)
 {
-	//CEGUI::System &sys = CEGUI::System::getSingleton();
-	//sys.injectMouseButtonDown(convertButton(id));
-
-	// If the mouse press is on a CEGUI window ignore it
-    //CEGUI::Window *tempWindow = sys.getWindowContainingMouse();
-
-    /*if (tempWindow != 0 && tempWindow->getName().compare("Root") != 0)
-    {
-        mouseDownOnCEGUIWindow_ = true;
-		std::cout << "Mouse pressed on CEGUI Window" << std::endl;
-        return true;
-    }
-    else
-    {
-        mouseDownOnCEGUIWindow_ = false;
-    }*/
-
 	switch(id)
 	{
 		case  OIS::MB_Left:
@@ -160,9 +112,6 @@ bool InputManager::mousePressed(const OIS::MouseEvent &arg, OIS::MouseButtonID i
 
 bool InputManager::mouseReleased(const OIS::MouseEvent &arg, OIS::MouseButtonID id)
 {
-	//CEGUI::System &sys = CEGUI::System::getSingleton();
-	//sys.injectMouseButtonUp(convertButton(id));
-
 	if (mouseDownOnCEGUIWindow_)
         return true;
 
@@ -190,13 +139,6 @@ bool InputManager::mouseReleased(const OIS::MouseEvent &arg, OIS::MouseButtonID 
 
 bool InputManager::keyPressed(const OIS::KeyEvent &arg)
 {
-	//inject key to Gui
-    //CEGUI::System* sys = CEGUI::System::getSingletonPtr();
-    //sys->injectKeyDown(arg.key);
-    //sys->injectChar(arg.text);
-
-	//CameraManager& camMgr = CameraManager::getSingleton();
-
 	switch (arg.key)
     {
         case OIS::KC_GRAVE:
@@ -360,10 +302,6 @@ bool InputManager::keyPressed(const OIS::KeyEvent &arg)
 
 bool InputManager::keyReleased(const OIS::KeyEvent &arg)
 {
-	//inject key to Gui
-    //CEGUI::System* sys = CEGUI::System::getSingletonPtr();
-	//sys->injectKeyUp(arg.key);
-
 	switch (arg.key)
     {
 		case OIS::KC_GRAVE:

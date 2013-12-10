@@ -189,23 +189,10 @@ void DAO_FrameListener::updateCharacterControl(const Ogre::FrameEvent& evt)
 					mouse_data = inputManager_->getMouseExtraData();
 					if(inputManager_->isMouseButtonPressed(OIS::MB_Left) || inputManager_->isMouseButtonPressed(OIS::MB_Right))
 					{
-						//If visible, store the mouse position befor hiding, for reset
-						/*if(CEGUI::MouseCursor::getSingleton().isVisible())
-						{
-							m_mouse_cursor_pos_ = CEGUI::MouseCursor::getSingleton().getPosition();
-						}
-						CEGUI::MouseCursor::getSingleton().hide();*/
-
+						
 					}
 					else
 					{
-						//If cursor was invisible, restore the last position
-						/*if(!CEGUI::MouseCursor::getSingleton().isVisible())
-						{
-							CEGUI::MouseCursor::getSingleton().setPosition(m_mouse_cursor_pos_);
-						}
-						CEGUI::MouseCursor::getSingleton().show();*/
-
 						mouse_data.x = 0.0f;
 						mouse_data.y = 0.0f;
 					}
