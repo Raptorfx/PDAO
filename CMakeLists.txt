@@ -16,7 +16,6 @@ include_directories("${PROJECT_BINARY_DIR}")
 set(SOURCE
     src/CameraControlSystem.cpp
     src/Character.cpp
-    src/CollisionTools.cpp
     src/DAO_Application.cpp
     src/DAO_FrameListener.cpp
     src/DAO_ResourceManager.cpp

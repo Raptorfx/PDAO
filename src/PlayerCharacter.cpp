@@ -21,8 +21,6 @@ PlayerCharacter::PlayerCharacter(Ogre::String name, Ogre::SceneManager *sceneMgr
     mEntity_ = mSceneMgr_->createEntity (mName_, "Stickman.mesh");
     mCharacterNode_->attachObject (mEntity_);
 	mCharacterNode_->scale(1.0f, 1.0f, 1.0f);
-	//mEntity_->setMaterialName("Ogre/Skin");
-	//mEntity_->setMaterialName("Shockwave/skin");
 	mEntity_->setMaterialName("Examples/Robot");
 
 	mSword1 = sceneMgr->createEntity("SinbadSword1", "Sword.mesh");

@@ -16,12 +16,6 @@ void  TerrainManager::createTerrain()
 	terrain_group_ = OGRE_NEW Ogre::TerrainGroup(RenderManager::getSingletonPtr()->getSceneManager(), Ogre::Terrain::ALIGN_X_Z, TERRAIN_SIZE, TERRAIN_WORLD_SIZE);
 	terrain_group_->setFilenameConvention(Ogre::String("BasicTutorial3Terrain"), Ogre::String("dat"));
 
-	//Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(Ogre::TFO_ANISOTROPIC);
-	//Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(7);
-
-	//RenderManager::getSingletonPtr()->getSceneManager()->setFog(Ogre::FOG_LINEAR, Ogre::ColourValue(0.7, 0.7, 0.8), 0, 10000, 25000);
-
-
 	Ogre::Vector3 lightdir(0.55f, -0.3f, 0.75f);
     lightdir.normalise();
  
@@ -34,23 +28,6 @@ void  TerrainManager::createTerrain()
     RenderManager::getSingletonPtr()->getSceneManager()->setAmbientLight(Ogre::ColourValue(0.2f, 0.2f, 0.2f));
 
 	configureTerrainDefaults(light);
-
-
-	/*
-	// Paging setup
-	mPageManager = OGRE_NEW Ogre::PageManager();
-	// Since we're not loading any pages from .page files, we need a way just 
-	// to say we've loaded them without them actually being loaded
-	mPageManager->setPageProvider(&mDummyPageProvider);
-	mPageManager->addCamera(RenderManager::getSingletonPtr()->getCamera());
-	mTerrainPaging = OGRE_NEW Ogre::TerrainPaging(mPageManager);
-	Ogre::PagedWorld* world = mPageManager->createWorld();
-	mTerrainPaging->createWorldSection(world, terrain_group_, 2000, 3000, 
-		TERRAIN_PAGE_MIN_X, TERRAIN_PAGE_MIN_Y, 
-		TERRAIN_PAGE_MAX_X, TERRAIN_PAGE_MAX_Y);
-
-	*/
-
 
 	for (long x = 0; x <= 1; ++x)
         for (long y = 0; y <= 1; ++y)
@@ -69,11 +46,7 @@ void  TerrainManager::createTerrain()
     }
 
 	terrain_group_->freeTemporaryResources();
-	//DAO_Application::getSingleton().getWindow()->getViewport()->setBackgroundColour(Ogre::ColourValue(0.9f, 0.9f, 0.9f));
-
 	RenderManager::getSingletonPtr()->getSceneManager()->setSkyDome(true, "FirstSkyDome", 50.0f, 6.123f);
-
-	//sceneManager_->setFog(Ogre::FOG_LINEAR, Ogre::ColourValue(0.9f, 0.9f, 0.9f), 0.0, 2000, 5000);
 }
 
 void TerrainManager::defineTerrain(long x, long y)

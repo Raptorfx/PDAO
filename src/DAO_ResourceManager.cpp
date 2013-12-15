@@ -110,7 +110,6 @@ void DAO_ResourceManager::setupResources()
 			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(dataname, typeName, sectionName);
 		}
 	}
-	//Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
 void DAO_ResourceManager::takeScreenshot()

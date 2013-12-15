@@ -58,10 +58,6 @@ void DAO_FrameListener::windowResized(Ogre::RenderWindow* rw)
     const OIS::MouseState &ms = inputManager_->getMouse()->getMouseState();
     ms.width = width;
     ms.height = height;
-
-    //Notify CEGUI that the display size has changed.
-    /*CEGUI::System::getSingleton().notifyDisplaySizeChanged(CEGUI::Size(
-            static_cast<float> (width), static_cast<float> (height)));*/
 }
 
 /*! \brief Unattach OIS before window shutdown (very important under Linux)

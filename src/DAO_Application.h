@@ -6,16 +6,10 @@
 #include "Ogre/OgreErrorDialog.h"
 #include "OIS/OIS.h"
 
-//#include "CEGUI.h"
-//#include "RendererModules/Ogre/CEGUIOgreRenderer.h"
-
-//#include "OgreBulletDynamicsRigidBody.h"
-
 #include "DAO_ResourceManager.h"
 #include "LogManager.h"
 
 #include "DAO_FrameListener.h"
-//#include "StartScreen\StartupFrameListener.h"
 #include "GlobalValueStore.h"
 
 class DAO_FrameListener;

@@ -71,7 +71,7 @@ bool InputManager::mouseMoved(const OIS::MouseEvent &evt)
 
 	m_mouse_extra_data_.x = m_rel_angle_x_;
 	m_mouse_extra_data_.y = m_rel_angle_y_;
-	m_mouse_extra_data_.w = evt.state.Z.rel;
+	m_mouse_extra_data_.w = (Ogre::Real)evt.state.Z.rel;
 
 	rotX_ += evt.state.X.rel;
 	rotY_ += evt.state.Y.rel;

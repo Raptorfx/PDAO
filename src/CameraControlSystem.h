@@ -6,7 +6,7 @@
 #include "InputManager.h"
 #include "TerrainManager.h"
 
-class CameraControlSystem// : public Ogre::Singleton<CameraControlSystem>
+class CameraControlSystem
 {
 public:
 

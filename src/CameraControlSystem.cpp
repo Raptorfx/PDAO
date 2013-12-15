@@ -1,8 +1,5 @@
 #include "CameraControlSystem.h"
 
-
-//template<> CameraControlSystem* Ogre::Singleton<CameraControlSystem>::msSingleton = 0;
-
 CameraControlSystem::CameraControlSystem(Ogre::String name, Ogre::SceneManager *sceneMgr, Ogre::Camera *camera) :
         mName_(name),
         mSceneMgr_(sceneMgr)

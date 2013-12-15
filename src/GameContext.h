@@ -33,13 +33,6 @@ private:
 
 	PlayerCharacter*		player;
 	CameraControlSystem*    cameraControl;
-
-    /*long int                previousTurn;
-    Ogre::SceneNode*        creatureSceneNode;
-    Ogre::SceneNode*        roomSceneNode;
-    Ogre::SceneNode*        fieldSceneNode;
-    Ogre::SceneNode*        lightSceneNode;
-    Ogre::Timer             statsDisplayTimer;*/
 };
 
 #endif
