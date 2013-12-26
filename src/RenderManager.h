@@ -5,21 +5,18 @@
 #include "OgreSceneManager.h"
 #include "OgreSceneNode.h"
 
-#include "OGRE/Terrain/OgreTerrain.h"
-#include "OGRE/Terrain/OgreTerrainGroup.h"
-#include "OGRE/Terrain/OgreTerrainQuadTreeNode.h"
-#include "OGRE/Terrain/OgreTerrainMaterialGeneratorA.h"
-#include "OGRE/Terrain/OgreTerrainPaging.h"
-
 #include "Ogre/RTShaderSystem/OgreShaderExPerPixelLighting.h"
 #include "Ogre/RTShaderSystem/OgreShaderExNormalMapLighting.h"
 #include "Ogre/RTShaderSystem/OgreShaderGenerator.h"
+
+#include "Ogre\OgreFrameListener.h"
+#include "Ogre\OgreWindowEventUtilities.h"
 
 #include "DAO_Application.h"
 #include "DAO_ResourceManager.h"
 
 #include "LogManager.h"
-#include "TerrainManager.h"
+#include "Terrain/TerrainManager.h"
 
 class TerrainManager;
 
@@ -36,6 +33,8 @@ public:
 	void createCamera();
     void createViewports();
     void createScene();
+
+	void frameStarted(const Ogre::FrameEvent& evt);
 
 private:
 

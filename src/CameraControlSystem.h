@@ -4,7 +4,7 @@
 #include "Ogre/Ogre.h"
 
 #include "InputManager.h"
-#include "TerrainManager.h"
+#include "Terrain/TerrainManager.h"
 
 class CameraControlSystem
 {

@@ -16,7 +16,7 @@ RenderManager::RenderManager():
 RenderManager::~RenderManager()
 {
 	DAO_Application::getSingletonPtr()->getRoot()->shutdown();
-	delete mTerrainManager_;
+	OGRE_DELETE mTerrainManager_;
 }
 
 /*! \brief Sets up the main camera
@@ -50,9 +50,14 @@ void RenderManager::createViewports()
 */
 void RenderManager::createScene()
 {
-	mTerrainManager_ = new TerrainManager();
+	mTerrainManager_ = OGRE_NEW TerrainManager();
 	mTerrainManager_->createTerrain();
 
 	sceneManager_->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+}
+
+void RenderManager::frameStarted(const Ogre::FrameEvent& evt)
+{
+	mTerrainManager_->frameStarted();
 }
 

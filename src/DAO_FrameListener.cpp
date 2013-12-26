@@ -100,12 +100,14 @@ bool DAO_FrameListener::frameStarted(const Ogre::FrameEvent& evt)
 	if (mWindow_->isClosed())
 		return false;
 
-	std::cout << evt.timeSinceLastFrame << std::endl;
+	//std::cout << evt.timeSinceLastFrame << std::endl;
 
 	//Need to capture/update each device
     inputManager_->getKeyboard()->capture();
     inputManager_->getMouse()->capture();
 
+	//Update the terrain
+	renderManager_->frameStarted(evt);
 
 	updateCharacterControl(evt);
 

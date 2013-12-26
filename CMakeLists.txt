@@ -28,8 +28,13 @@ set(SOURCE
     src/RenderManager.cpp
     src/Resource.cpp
     src/ResourceGroup.cpp
-    src/TerrainManager.cpp
+    
     src/Functions/md5.cpp
+
+	#Terrain
+	src/Terrain/TerrainManager.cpp
+	src/Terrain/TerrainPageProvider.cpp
+	src/Terrain/TerrainDefiner.cpp
 )
 
 

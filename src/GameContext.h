@@ -9,7 +9,7 @@
 #include "LogManager.h"
 #include "RenderManager.h"
 #include "InputManager.h"
-#include "TerrainManager.h"
+#include "Terrain/TerrainManager.h"
 
 class CameraControlSystem;
 class InputManager;

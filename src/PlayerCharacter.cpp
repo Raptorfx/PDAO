@@ -151,6 +151,7 @@ void PlayerCharacter::update(Ogre::Real elapsedTime, OIS::Keyboard *input)
 
 	// Perform the scene query
 	Ogre::TerrainGroup::RayResult result = terrain->rayIntersects(queryRay);
+
 	if(result.hit) {
 		mCurrentGroundPosition = result.position.y;
 	}
