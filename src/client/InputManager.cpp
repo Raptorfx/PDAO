@@ -112,9 +112,6 @@ bool InputManager::mousePressed(const OIS::MouseEvent &arg, OIS::MouseButtonID i
 
 bool InputManager::mouseReleased(const OIS::MouseEvent &arg, OIS::MouseButtonID id)
 {
-	if (mouseDownOnCEGUIWindow_)
-        return true;
-
 	switch(id)
 	{
 		case  OIS::MB_Left:

@@ -16,7 +16,7 @@ RenderManager::RenderManager():
 RenderManager::~RenderManager()
 {
 	DAO_Application::getSingletonPtr()->getRoot()->shutdown();
-	OGRE_DELETE mTerrainManager_;
+	//OGRE_DELETE mTerrainManager_;
 }
 
 /*! \brief Sets up the main camera

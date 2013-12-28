@@ -14,15 +14,14 @@ extract them all within the deps folder
 Media folder can be downloaded from
 http://project-dao.at.vu/media.rar
 
-Create a folder structure like this:
-- Project
-- - build
-- - deps
-- - media
-- - PDAO (<- git clone)
 
 Use CMake within PDAO and specify the build directory as output.
+Change all /MD within CMakeGUI to /MT
+Set the Paths to the depencencies for each variable in CMake
+
 Copy the dll's from Ogre RelWithDebInfo to the build folder.
 Copy media folder to build folder
 Copy config folder from PDAO to build folder
+
 In VS select as build RelWithDebInfo
+

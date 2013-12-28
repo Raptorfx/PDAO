@@ -13,89 +13,72 @@ test_big_endian(MYGUI_TEST_BIG_ENDIAN)
 
 include_directories("${PROJECT_BINARY_DIR}")
 
-set(SOURCE
-    src/CameraControlSystem.cpp
-    src/Character.cpp
-    src/DAO_Application.cpp
-    src/DAO_FrameListener.cpp
-    src/DAO_ResourceManager.cpp
-    src/GameContext.cpp
-    src/GlobalValueStore.cpp
-    src/InputManager.cpp
-    src/LogManager.cpp
-    src/main.cpp
-    src/PlayerCharacter.cpp
-    src/RenderManager.cpp
-    src/Resource.cpp
-    src/ResourceGroup.cpp
+set(DAO_SOURCE
+    src/client/CameraControlSystem.cpp
+    src/client/Character.cpp
+    src/client/DAO_Application.cpp
+    src/client/DAO_FrameListener.cpp
+    src/client/DAO_ResourceManager.cpp
+    src/client/GameContext.cpp
+    src/client/GlobalValueStore.cpp
+    src/client/InputManager.cpp
+    src/client/LogManager.cpp
+    src/client/main.cpp
+    src/client/PlayerCharacter.cpp
+    src/client/RenderManager.cpp
+    src/client/Resource.cpp
+    src/client/ResourceGroup.cpp
     
-    src/Functions/md5.cpp
+    src/client/Functions/md5.cpp
 
-	#Terrain
-	src/Terrain/TerrainManager.cpp
-	src/Terrain/TerrainPageProvider.cpp
-	src/Terrain/TerrainDefiner.cpp
+  	#Terrain
+  	src/client/Terrain/TerrainManager.cpp
+  	src/client/Terrain/TerrainPageProvider.cpp
+  	src/client/Terrain/TerrainDefiner.cpp
 )
 
+set(HEIGHTMAP_GENERATOR_SOURCE
+    src/utils/heightmap_generator/main.cpp
+    src/utils/heightmap_generator/noiseutils.cpp
+)
 
-
-
-
-IF(MINGW)
-
-    #Libs
-    SET(DEPENDENCY_DIR "" CACHE PATH "")
-    SET(BOOST_INCLUDE_DIR "" CACHE PATH "")
-    SET(BOOST_LIB_DIR "" CACHE PATH "")
-    
-    include_directories(${DEPENDENCY_INCLUDE_DIR})
-    include_directories(${BOOST_INCLUDE_DIR})
-    
-    include_directories(${BOOST_LIB_DIR})
-    link_directories(${BOOST_LIB_DIR})
-    
-    include_directories(${DEPENDENCY_DIR}/include)
-    include_directories(${DEPENDENCY_DIR}/include/OGRE)
-    include_directories(${DEPENDENCY_DIR}/include/OGRE/Paging)
-    
-    link_directories(${DEPENDENCY_DIR}/lib)
-    link_directories(${DEPENDENCY_DIR}/lib/Release)
-    link_directories(${DEPENDENCY_DIR}/lib/relwithdebinfo)
-    link_directories(${DEPENDENCY_DIR}/lib/relwithdebinfo/opt)
-    
-    message(STATUS "DEPENDENCY_DIR = ${DEPENDENCY_DIR}")
-    message(STATUS "Adding linker directory = ${DEPENDENCY_DIR}/lib")
-    message(STATUS "Adding linker directory = ${DEPENDENCY_DIR}/lib/Release")
-    message(STATUS "Adding linker directory = ${DEPENDENCY_DIR}/lib/relwithdebinfo")
-    message(STATUS "Adding linker directory = ${DEPENDENCY_DIR}/lib/relwithdebinfo/opt")
-
-    set(LIBS boost_system)
-    set(LIBS ${LIBS} boost_thread)
-    set(LIBS ${LIBS} pthreadGC2)
-    set(LIBS ${LIBS} cg.lib)
-    set(LIBS ${LIBS} libFreeImage.a)
-    set(LIBS ${LIBS} libfreetype.a)
-    set(LIBS ${LIBS} libOIS.dll.a)
-    set(LIBS ${LIBS} libzlib.a)
-    set(LIBS ${LIBS} libzziplib.a)
-    set(LIBS ${LIBS} libMyGUI.OgrePlatform.a)
-    set(LIBS ${LIBS} MyGUIEngineStatic.a)
-    set(LIBS ${LIBS} libOgreMainStatic.a)
-    set(LIBS ${LIBS} libOgreOverlayStatic.a)
-    set(LIBS ${LIBS} libOgrePagingStatic.a)
-    set(LIBS ${LIBS} libOgrePropertyStatic.a)
-    set(LIBS ${LIBS} libOgreRTShaderSystemStatic.a)
-    set(LIBS ${LIBS} libOgreTerrainStatic.a)
-    set(LIBS ${LIBS} libOgreVolumeStatic.a)
-    set(LIBS ${LIBS} libPlugin_StrangeButtonStatic.a)
-    set(LIBS ${LIBS} libPlugin_BSPSceneManagerStatic.a)
-    set(LIBS ${LIBS} libPlugin_CgProgramManagerStatic.a)
-    set(LIBS ${LIBS} libPlugin_OctreeSceneManagerStatic.a)
-    set(LIBS ${LIBS} libPlugin_OctreeZoneStatic.a)
-    set(LIBS ${LIBS} libPlugin_ParticleFXStatic.a)
-    set(LIBS ${LIBS} libPlugin_PCZSceneManagerStatic.a)
-    set(LIBS ${LIBS} RenderSystemGLStatic)
-ENDIF(MINGW)
+set(LIBNOISE_SOURCE
+    src/utils/heightmap_generator/noise/latlon.cpp
+    src/utils/heightmap_generator/noise/noisegen.cpp
+    src/utils/heightmap_generator/noise/model/cylinder.cpp
+    src/utils/heightmap_generator/noise/model/line.cpp
+    src/utils/heightmap_generator/noise/model/plane.cpp
+    src/utils/heightmap_generator/noise/model/sphere.cpp
+    src/utils/heightmap_generator/noise/module/abs.cpp
+    src/utils/heightmap_generator/noise/module/add.cpp
+    src/utils/heightmap_generator/noise/module/billow.cpp
+    src/utils/heightmap_generator/noise/module/blend.cpp
+    src/utils/heightmap_generator/noise/module/cache.cpp
+    src/utils/heightmap_generator/noise/module/checkerboard.cpp
+    src/utils/heightmap_generator/noise/module/clamp.cpp
+    src/utils/heightmap_generator/noise/module/const.cpp
+    src/utils/heightmap_generator/noise/module/curve.cpp
+    src/utils/heightmap_generator/noise/module/cylinders.cpp
+    src/utils/heightmap_generator/noise/module/displace.cpp
+    src/utils/heightmap_generator/noise/module/exponent.cpp
+    src/utils/heightmap_generator/noise/module/invert.cpp
+    src/utils/heightmap_generator/noise/module/max.cpp
+    src/utils/heightmap_generator/noise/module/min.cpp
+    src/utils/heightmap_generator/noise/module/modulebase.cpp
+    src/utils/heightmap_generator/noise/module/multiply.cpp
+    src/utils/heightmap_generator/noise/module/perlin.cpp
+    src/utils/heightmap_generator/noise/module/power.cpp
+    src/utils/heightmap_generator/noise/module/ridgedmulti.cpp
+    src/utils/heightmap_generator/noise/module/rotatepoint.cpp
+    src/utils/heightmap_generator/noise/module/scalebias.cpp
+    src/utils/heightmap_generator/noise/module/scalepoint.cpp
+    src/utils/heightmap_generator/noise/module/select.cpp
+    src/utils/heightmap_generator/noise/module/spheres.cpp
+    src/utils/heightmap_generator/noise/module/terrace.cpp
+    src/utils/heightmap_generator/noise/module/translatepoint.cpp
+    src/utils/heightmap_generator/noise/module/turbulence.cpp
+    src/utils/heightmap_generator/noise/module/voronoi.cpp
+)
 
 IF(MSVC)
 
@@ -118,7 +101,7 @@ IF(MSVC)
     
     if(Boost_FOUND)
         include_directories(${Boost_INCLUDE_DIRS}) 
-        set(LIBS ${LIBS} ${Boost_LIBRARIES})   
+        set(DAO_LIBS ${DAO_LIBS} ${Boost_LIBRARIES})   
         add_definitions( -DBOOST_ALL_NO_LIB )                                                                                                                                                                                                                       
     endif()
     
@@ -132,34 +115,42 @@ IF(MSVC)
     link_directories(${OGRE_DIR}/lib/RelWithDebInfo)
     link_directories(${OGRE_DIR}/lib/RelWithDebInfo/opt)
     
-    set(LIBS ${LIBS} OgreMain.lib)
-    set(LIBS ${LIBS} OgreOverlay.lib)
-    set(LIBS ${LIBS} OgrePaging.lib)
-    set(LIBS ${LIBS} OgreProperty.lib)
-    set(LIBS ${LIBS} OgreRTShaderSystem.lib)
-    set(LIBS ${LIBS} OgreTerrain.lib)
-    set(LIBS ${LIBS} OgreVolume.lib)
-    set(LIBS ${LIBS} Plugin_BSPSceneManager.lib)
-    set(LIBS ${LIBS} Plugin_CgProgramManager.lib)
-    set(LIBS ${LIBS} Plugin_OctreeSceneManager.lib)
-    set(LIBS ${LIBS} Plugin_OctreeZone.lib)
-    set(LIBS ${LIBS} Plugin_ParticleFX.lib)
-    set(LIBS ${LIBS} Plugin_PCZSceneManager.lib)
-    set(LIBS ${LIBS} RenderSystem_Direct3D9.lib)
+    set(DAO_LIBS ${DAO_LIBS} OgreMain.lib)
+    set(DAO_LIBS ${DAO_LIBS} OgreOverlay.lib)
+    set(DAO_LIBS ${DAO_LIBS} OgrePaging.lib)
+    set(DAO_LIBS ${DAO_LIBS} OgreProperty.lib)
+    set(DAO_LIBS ${DAO_LIBS} OgreRTShaderSystem.lib)
+    set(DAO_LIBS ${DAO_LIBS} OgreTerrain.lib)
+    set(DAO_LIBS ${DAO_LIBS} OgreVolume.lib)
+    set(DAO_LIBS ${DAO_LIBS} Plugin_BSPSceneManager.lib)
+    set(DAO_LIBS ${DAO_LIBS} Plugin_CgProgramManager.lib)
+    set(DAO_LIBS ${DAO_LIBS} Plugin_OctreeSceneManager.lib)
+    set(DAO_LIBS ${DAO_LIBS} Plugin_OctreeZone.lib)
+    set(DAO_LIBS ${DAO_LIBS} Plugin_ParticleFX.lib)
+    set(DAO_LIBS ${DAO_LIBS} Plugin_PCZSceneManager.lib)
+    set(DAO_LIBS ${DAO_LIBS} RenderSystem_Direct3D9.lib)
     
     SET(OGRE_DEPENDENCY_DIR "" CACHE PATH "")
     include_directories(${OGRE_DEPENDENCY_DIR}/include)
     link_directories(${OGRE_DEPENDENCY_DIR}/lib/Release)
     
-    set(LIBS ${LIBS} OIS.lib)
+    SET(LIBNOISE_DIR "" CACHE PATH "")
+    include_directories(${LIBNOISE_DIR}/include)
+    link_directories(${LIBNOISE_DIR}/bin)
+    
+    set(HEIGHTMAP_GENERATOR_LIBS ${HEIGHTMAP_GENERATOR_LIBS} libnoise.lib)
+    
+    set(DAO_LIBS ${DAO_LIBS} OIS.lib)
     
     SET(OGRE_PLUGIN_DIR "" CACHE PATH "")
 
 ENDIF(MSVC)
 
-add_executable(DarkAgesOnline ${SOURCE})
+add_executable(DarkAgesOnline ${DAO_SOURCE})
+target_link_libraries(DarkAgesOnline ${DAO_LIBS})
 
-target_link_libraries(DarkAgesOnline ${LIBS})
+add_executable(Heightmap_Generator ${HEIGHTMAP_GENERATOR_SOURCE} ${LIBNOISE_SOURCE})       
+target_link_libraries(Heightmap_Generator ${HEIGHTMAP_GENERATOR_LIBS})
 
 # This prints out ALL variables
 #get_cmake_property(_variableNames VARIABLES)

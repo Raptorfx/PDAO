@@ -92,5 +92,5 @@ void TerrainManager::configureTerrainDefaults(Ogre::Light* light)
 
 void TerrainManager::frameStarted()
 {
-	terrain_group_->autoUpdateLodAll(false, Ogre::Any( Ogre::Real(HOLD_LOD_DISTANCE) ));
+	terrain_group_->autoUpdateLodAll(true, Ogre::Any( Ogre::Real(HOLD_LOD_DISTANCE) ));
 }
