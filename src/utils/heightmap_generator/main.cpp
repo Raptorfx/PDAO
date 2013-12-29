@@ -8,6 +8,30 @@
 
 int main()
 {
+	//Config
+	int total_x = 10;
+	int total_y = 10;
+	int chunk_size = 256;
+	int preview_size_multiplier = 1; //Increase the preview size for testing, default = 1
+	bool colour_output = false;
+	bool colour_preview_output = true;
+
+
+	if( !(CreateDirectory("img", NULL) || ERROR_ALREADY_EXISTS == GetLastError()))
+		 std::cout << "Failed to create img folder" << std::endl;
+
+	std::cout << "Building Terrain: " << std::endl
+		<< "X size        : " << total_x*chunk_size << std::endl
+		<< "Y size        : " << total_y*chunk_size << std::endl
+		<< "Chunk Size    : " << chunk_size << std::endl
+		<< "X elements    : " << total_x << std::endl
+		<< "Y elements    : " << total_y << std::endl
+		<< "Total elements: " << total_x*total_y << std::endl 
+		<< "Preview size: : " << total_x*chunk_size*preview_size_multiplier << "x" << total_y*chunk_size*preview_size_multiplier << std::endl
+		<< std::endl;
+
+
+
 	noise::module::RidgedMulti mountainTerrain;
 	mountainTerrain.SetSeed(1234);
 
@@ -77,24 +101,8 @@ int main()
 	height_map_builder.SetSourceModule(finalTerrain);
 	height_map_builder.SetDestNoiseMap(height_map);
 
-	height_map_builder.SetDestSize(256,256);
+	height_map_builder.SetDestSize(chunk_size,chunk_size);
 	//height_map_builder.SetBounds(0.0,1.0,0.0,1.0);
-
-
-	if(CreateDirectory("img", NULL) || ERROR_ALREADY_EXISTS == GetLastError())
-	{
-		std::cout << "Created image output folder" << std::endl;
-	}
-	else
-	{
-		 std::cout << "Failed to create img folder" << std::endl;
-	}
-
-
-	bool colour_output = false;
-
-	int total_x = 2;
-	int total_y = 2;
 
 	double i_d = 0.0;
 	double j_d = 0.0;
@@ -106,16 +114,13 @@ int main()
 
 		for(int j = (total_y/2)*-1; j < total_y/2; ++j)
 		{
-			std::cout << "Building " << i << " - " << j << std::endl;
+			std::cout << "Building " << i << " : " << j << std::endl;
 			
 			std::stringstream j_conv;
 			j_conv << j;
 			height_map_builder.SetBounds(i, i+1.0, j, j+1.0);
 
 			height_map_builder.Build();
-
-
-
 
 			noise::utils::RendererImage renderer;
 			noise::utils::Image image;
@@ -138,9 +143,6 @@ int main()
 
 			renderer.Render();
 
-
-
-
 			noise::utils::WriterBMP writer;
 			writer.SetSourceImage(image);
 			writer.SetDestFilename("img/height_map_"+i_conv.str()+"_"+j_conv.str()+".bmp");
@@ -154,44 +156,50 @@ int main()
 	}
 	
 
-	/*height_map_builder.SetDestSize(2048,2048);
-	height_map_builder.SetBounds(0.0, 64.0, 0.0, 64.0);
-
-	//height_map_builder.EnableSeamless(true);
-	height_map_builder.Build();
-	
-
-
-
-
-	noise::utils::RendererImage renderer;
-	noise::utils::Image image;
-
-	renderer.SetSourceNoiseMap(height_map);
-	renderer.SetDestImage(image);
-
-	if(colour_output)
 	{
-		renderer.ClearGradient ();
-		renderer.AddGradientPoint (-1.00, utils::Color ( 32, 32,   224, 255)); // water
-		renderer.AddGradientPoint (-0.75, utils::Color ( 32, 160,   0, 255)); // grass
-		renderer.AddGradientPoint (-0.25, utils::Color (131, 103,   61, 255)); // dirt
-		renderer.AddGradientPoint ( 0.25, utils::Color (128, 128, 128, 255)); // rock
-		renderer.AddGradientPoint ( 1.00, utils::Color (255, 255, 255, 255)); // snow
-		renderer.EnableLight ();
-		renderer.SetLightContrast (3.0);
-		renderer.SetLightBrightness (2.0);
+		std::cout << "Building map preview" << std::endl;
+
+		//height_map_builder.SetDestSize(total_x*chunk_size,total_y*chunk_size);
+		height_map_builder.SetDestSize(1024,1024);
+		height_map_builder.SetBounds((total_x/2)*-1*preview_size_multiplier, 
+										total_x/2*preview_size_multiplier, 
+										(total_y/2)*-1*preview_size_multiplier, 
+										total_y/2*preview_size_multiplier);
+
+		//height_map_builder.EnableSeamless(true);
+		height_map_builder.Build();
+	
+		noise::utils::RendererImage renderer;
+		noise::utils::Image image;
+
+		renderer.SetSourceNoiseMap(height_map);
+		renderer.SetDestImage(image);
+
+		if(colour_preview_output)
+		{
+			renderer.ClearGradient ();
+			renderer.AddGradientPoint (-1.00, utils::Color ( 32, 32,   224, 255)); // water
+			renderer.AddGradientPoint (-0.75, utils::Color ( 32, 160,   0, 255)); // grass
+			renderer.AddGradientPoint (-0.25, utils::Color (131, 103,   61, 255)); // dirt
+			renderer.AddGradientPoint ( 0.25, utils::Color (128, 128, 128, 255)); // rock
+			renderer.AddGradientPoint ( 1.00, utils::Color (255, 255, 255, 255)); // snow
+			renderer.EnableLight ();
+			renderer.SetLightContrast (3.0);
+			renderer.SetLightBrightness (2.0);
+		}
+
+		renderer.Render();
+
+		noise::utils::WriterBMP writer;
+		writer.SetSourceImage(image);
+		writer.SetDestFilename("img/height_map_total.bmp");
+		writer.WriteDestFile();
 	}
 
-	renderer.Render();
 
-
-
-
-	noise::utils::WriterBMP writer;
-	writer.SetSourceImage(image);
-	writer.SetDestFilename("height_map_total.bmp");
-	writer.WriteDestFile();*/
+	std::cout << "Return to exit" << std::endl;
+	char c;
+	std::cin.get(c);
 
 	return 0;
 }
