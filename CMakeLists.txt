@@ -14,26 +14,43 @@ test_big_endian(MYGUI_TEST_BIG_ENDIAN)
 include_directories("${PROJECT_BINARY_DIR}")
 
 set(DAO_SOURCE
+	src/client/CameraControlSystem.h
     src/client/CameraControlSystem.cpp
+	src/client/Character.h
     src/client/Character.cpp
+	src/client/DAO_Application.h
     src/client/DAO_Application.cpp
+	src/client/DAO_FrameListener.h
     src/client/DAO_FrameListener.cpp
+	src/client/DAO_ResourceManager.h
     src/client/DAO_ResourceManager.cpp
+	src/client/GameContext.h
     src/client/GameContext.cpp
+	src/client/GlobalValueStore.h
     src/client/GlobalValueStore.cpp
+	src/client/InputManager.h
     src/client/InputManager.cpp
+	src/client/LogManager.h
     src/client/LogManager.cpp
     src/client/main.cpp
+	src/client/PlayerCharacter.h
     src/client/PlayerCharacter.cpp
+	src/client/RenderManager.h
     src/client/RenderManager.cpp
+	src/client/Resource.h
     src/client/Resource.cpp
+	src/client/ResourceGroup.h
     src/client/ResourceGroup.cpp
-    
+
+    src/client/Functions/md5.h
     src/client/Functions/md5.cpp
 
   	#Terrain
+	src/client/Terrain/TerrainManager.h
   	src/client/Terrain/TerrainManager.cpp
+	src/client/Terrain/TerrainPageProvider.h
   	src/client/Terrain/TerrainPageProvider.cpp
+	src/client/Terrain/TerrainDefiner.h
   	src/client/Terrain/TerrainDefiner.cpp
 )
 
