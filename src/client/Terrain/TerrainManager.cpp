@@ -53,6 +53,8 @@ void  TerrainManager::createTerrain()
 
 	terrain_group_->freeTemporaryResources();
 	RenderManager::getSingletonPtr()->getSceneManager()->setSkyDome(true, "FirstSkyDome", 50.0f, 6.123f);
+
+	terrain_group_->autoUpdateLodAll(true, Ogre::Any( Ogre::Real(HOLD_LOD_DISTANCE) ));
 }
 
 void TerrainManager::configureTerrainDefaults(Ogre::Light* light)
@@ -92,5 +94,5 @@ void TerrainManager::configureTerrainDefaults(Ogre::Light* light)
 
 void TerrainManager::frameStarted()
 {
-	terrain_group_->autoUpdateLodAll(true, Ogre::Any( Ogre::Real(HOLD_LOD_DISTANCE) ));
+	terrain_group_->autoUpdateLodAll(false, Ogre::Any( Ogre::Real(HOLD_LOD_DISTANCE) ));
 }

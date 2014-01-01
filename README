@@ -16,12 +16,11 @@ http://project-dao.at.vu/media.rar
 
 
 Use CMake within PDAO and specify the build directory as output.
-Change all /MD within CMakeGUI to /MT
 Set the Paths to the depencencies for each variable in CMake
 
-Copy the dll's from Ogre RelWithDebInfo to the build folder.
-Copy media folder to build folder
-Copy config folder from PDAO to build folder
+In VS select as build RelWithDebInfo and build it
 
-In VS select as build RelWithDebInfo
-
+Copy the dll's from Ogre RelWithDebInfo to the build output folder.
+Copy the ddl's from Plugins RelWithDebInfo (for MyGUI) to the build output folder
+Copy media folder to build output folder
+Copy config folder from PDAO to build output folder

@@ -66,6 +66,9 @@ bool InputManager::isMouseButtonPressed(OIS::MouseButtonID id)
 
 bool InputManager::mouseMoved(const OIS::MouseEvent &evt)
 {
+	//Inject Mouse for GUI
+	GUIMain::getSingletonPtr()->injectMouseMove(evt.state.X.abs, evt.state.Y.abs, evt.state.Z.abs);
+
 	m_rel_angle_x_ = (float)( (double)evt.state.X.rel / (double)DAO_Application::getSingleton().getWindow()->getViewport(0)->getActualWidth() );
 	m_rel_angle_y_ = (float)( (double)evt.state.Y.rel / (double)DAO_Application::getSingleton().getWindow()->getViewport(0)->getActualHeight());
 
@@ -87,6 +90,9 @@ bool InputManager::mouseMoved(const OIS::MouseEvent &evt)
 
 bool InputManager::mousePressed(const OIS::MouseEvent &arg, OIS::MouseButtonID id)
 {
+	//Inject Mouse for GUI
+	GUIMain::getSingletonPtr()->injectMousePress(arg.state.X.abs, arg.state.Y.abs, id);
+
 	switch(id)
 	{
 		case  OIS::MB_Left:
@@ -112,6 +118,9 @@ bool InputManager::mousePressed(const OIS::MouseEvent &arg, OIS::MouseButtonID i
 
 bool InputManager::mouseReleased(const OIS::MouseEvent &arg, OIS::MouseButtonID id)
 {
+	//Inject Mouse for GUI
+	GUIMain::getSingletonPtr()->injectMouseRelease(arg.state.X.abs, arg.state.Y.abs, id);
+
 	switch(id)
 	{
 		case  OIS::MB_Left:
@@ -136,6 +145,9 @@ bool InputManager::mouseReleased(const OIS::MouseEvent &arg, OIS::MouseButtonID 
 
 bool InputManager::keyPressed(const OIS::KeyEvent &arg)
 {
+	//Inject Keyboard for GUI
+	GUIMain::getSingletonPtr()->injectKeyPress(arg.key, arg.text);
+
 	switch (arg.key)
     {
         case OIS::KC_GRAVE:
@@ -299,6 +311,9 @@ bool InputManager::keyPressed(const OIS::KeyEvent &arg)
 
 bool InputManager::keyReleased(const OIS::KeyEvent &arg)
 {
+	//Inject Keyboard for GUI
+	GUIMain::getSingletonPtr()->injectKeyRelease(arg.key);
+
 	switch (arg.key)
     {
 		case OIS::KC_GRAVE:

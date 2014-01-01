@@ -10,6 +10,7 @@ DAO_Application::DAO_Application(void) :
         root_(0),
         window_(0)
 {
+	_keepRunning = true;
 	new GlobalValueStore();
 }
 
@@ -60,6 +61,7 @@ int DAO_Application::startup()
 	resMgr->loadResourceGroup("Base");
 	resMgr->loadResourceGroup("Mesh");
 	resMgr->loadResourceGroup("Sinbad");
+	resMgr->loadResourceGroup("MyGUI");
 
 	logManager->logMessage("*** Creating frame listener *** ", Ogre::LML_NORMAL);
     root_->addFrameListener(new DAO_FrameListener(window_));

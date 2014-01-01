@@ -19,23 +19,19 @@ DAO_FrameListener::DAO_FrameListener(Ogre::RenderWindow* win) :
 
 	//Initially set the camera to the player
 	cameraControl_->setTargetNode(player_->getCameraNode());
-	//mCamMode_ = CameraControlSystem::CameraMode::FirstPerson;
 	mCamMode_ = 1;
 
-	//renderManager_ = renderManager;
+	m_gui_main_ = new GUIMain();
+	m_gui_main_->init();
 
-
-	//inputManager_ = inputManager;
 	inputManager_ = new InputManager;
-
-	//ray_scene_query_ = app_->getSceneManager()->createRayQuery(Ogre::Ray());
-	//ray_scene_query_->setQueryMask(Ogre::SceneManager::WORLD_GEOMETRY_TYPE_MASK);
 
 	//Set initial mouse clipping size
     windowResized(mWindow_);
 
     //Register as a Window listener
     Ogre::WindowEventUtilities::addWindowEventListener(mWindow_, this);
+	
 
 	LogManager::getSingletonPtr()->logMessage("*** FrameListener initialized ***");
 }
@@ -43,7 +39,7 @@ DAO_FrameListener::DAO_FrameListener(Ogre::RenderWindow* win) :
 
 DAO_FrameListener::~DAO_FrameListener(void)
 {
-
+	delete m_gui_main_;
 }
 
 /*! \brief Adjust mouse clipping area
@@ -100,7 +96,7 @@ bool DAO_FrameListener::frameStarted(const Ogre::FrameEvent& evt)
 	if (mWindow_->isClosed())
 		return false;
 
-	//std::cout << evt.timeSinceLastFrame << std::endl;
+	std::cout << "Last Frame: " << evt.timeSinceLastFrame << std::endl;
 
 	//Need to capture/update each device
     inputManager_->getKeyboard()->capture();

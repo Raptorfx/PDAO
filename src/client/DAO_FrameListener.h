@@ -18,6 +18,7 @@
 #include "RenderManager.h"
 #include "PlayerCharacter.h"
 #include "CameraControlSystem.h"
+#include "GUI/GUIMain.h"
 
 //#include "CollisionTools.h"
 
@@ -25,6 +26,7 @@ class InputManager;
 class GameContext;
 class RenderManager;
 //class CameraControlSystem;
+class GUIMain;
 
 class DAO_FrameListener :
         public Ogre::Singleton<DAO_FrameListener>,
@@ -48,11 +50,6 @@ public:
 	bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 	bool frameEnded();
 
-
-	//CEGUI Functions
-    //bool quit(const CEGUI::EventArgs &e);
-    //Ogre::RaySceneQueryResult& doRaySceneQuery(const OIS::MouseEvent &arg);
-
 private:
 
 	void updateCharacterControl(const Ogre::FrameEvent& evt);
@@ -65,14 +62,12 @@ private:
 
 	RenderManager*          renderManager_;
     InputManager*           inputManager_;
+	GUIMain* m_gui_main_;
 
 	PlayerCharacter*		player_;
 	CameraControlSystem*    cameraControl_;
 	//CameraControlSystem::CameraMode				mCamMode_;
 	int mCamMode_;
-
-	//Store the mouse position for hide/show
-	//CEGUI::Point m_mouse_cursor_pos_;
 
 	Ogre::RaySceneQuery*    mRaySceneQuery_;
 

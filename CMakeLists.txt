@@ -52,6 +52,10 @@ set(DAO_SOURCE
   	src/client/Terrain/TerrainPageProvider.cpp
 	src/client/Terrain/TerrainDefiner.h
   	src/client/Terrain/TerrainDefiner.cpp
+
+	#GUI
+	src/client/GUI/GUIMain.h
+	src/client/GUI/GUIMain.cpp
 )
 
 set(HEIGHTMAP_GENERATOR_SOURCE
@@ -99,21 +103,11 @@ set(LIBNOISE_SOURCE
 
 IF(MSVC)
 
-    set(MSVC_RUNTIME "static")
-    foreach(variable ${variables})
-      if(${variable} MATCHES "/MDd")
-        string(REGEX REPLACE "/MDd" "/MTd" ${variable} "${${variable}}")
-      endif()
-      if(${variable} MATCHES "/MD")
-        string(REGEX REPLACE "/MD" "/MT" ${variable} "${${variable}}")
-      endif()
-    endforeach()
-    
     #BOOST
     
     set(Boost_USE_STATIC_LIBS ON) 
     set(Boost_USE_MULTITHREADED ON)  
-    set(Boost_USE_STATIC_RUNTIME ON) 
+    set(Boost_USE_STATIC_RUNTIME OFF) 
     find_package(Boost 1.55.0 COMPONENTS thread system) 
     
     if(Boost_FOUND)
@@ -146,11 +140,14 @@ IF(MSVC)
     set(DAO_LIBS ${DAO_LIBS} Plugin_ParticleFX.lib)
     set(DAO_LIBS ${DAO_LIBS} Plugin_PCZSceneManager.lib)
     set(DAO_LIBS ${DAO_LIBS} RenderSystem_Direct3D9.lib)
+	
     
     SET(OGRE_DEPENDENCY_DIR "" CACHE PATH "")
     include_directories(${OGRE_DEPENDENCY_DIR}/include)
     link_directories(${OGRE_DEPENDENCY_DIR}/lib/Release)
     
+	set(DAO_LIBS ${DAO_LIBS} freetype250.lib)
+
     SET(LIBNOISE_DIR "" CACHE PATH "")
     include_directories(${LIBNOISE_DIR}/include)
     link_directories(${LIBNOISE_DIR}/bin)
@@ -160,6 +157,11 @@ IF(MSVC)
     set(DAO_LIBS ${DAO_LIBS} OIS.lib)
     
     SET(OGRE_PLUGIN_DIR "" CACHE PATH "")
+	include_directories(${OGRE_PLUGIN_DIR}/include)
+	link_directories(${OGRE_PLUGIN_DIR}/lib)
+	link_directories(${OGRE_PLUGIN_DIR}/lib/RelWithDebInfo)
+	set(DAO_LIBS ${DAO_LIBS} MyGUIEngine.lib)
+	set(DAO_LIBS ${DAO_LIBS} MyGUI.OgrePlatform.lib)
 
 ENDIF(MSVC)
 

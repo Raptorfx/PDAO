@@ -41,8 +41,12 @@ void DAO_ResourceManager::initResources()
 	groupBase.addResource("FileSystem","../media/heightmaps");
 	groupBase.addResource("FileSystem","../media/materials/scripts");
 	groupBase.addResource("FileSystem","../media/materials/textures");
-
+	//groupBase.addResource("FileSystem","../media/MyGUI_Media");
 	resources_[groupBase.getName()] = groupBase;
+
+	ResourceGroup groupMyGUI("MyGUI");
+	groupMyGUI.addResource("FileSystem","../media/MyGUI_Media");
+	resources_[groupMyGUI.getName()] = groupMyGUI;
 
 	//Meshs
 	ResourceGroup groupMesh("Mesh");

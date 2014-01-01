@@ -4,12 +4,15 @@
 #include <map>
 
 #include "Ogre/OgreSingleton.h"
-#include "OIS\OIS.h"
+#include <OIS/OIS.h>
+
+#include "GUI/GUIMain.h"
 
 #include "LogManager.h"
 #include "DAO_FrameListener.h"
 
 class DAO_FrameListener;
+class GUIMain;
 
 class InputManager :
         public Ogre::Singleton<InputManager>,
