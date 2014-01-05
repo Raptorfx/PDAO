@@ -2,6 +2,10 @@
 
 void TerrainDefiner::define(Ogre::TerrainGroup* terrainGroup, long x, long y)
 {
+	//TODO: Sometime it tries to load weird huge terrain slots, compensate this for now
+	if(x < -10 || x > 10) x = 0;
+	if(y < -10 || y > 10) y = 0;
+
 	Ogre::String filename = generateFileName(x, y);
     if(Ogre::ResourceGroupManager::getSingleton().resourceExists(terrainGroup->getResourceGroup(), filename))
     {
