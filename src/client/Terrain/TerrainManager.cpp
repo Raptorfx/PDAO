@@ -28,7 +28,7 @@ void  TerrainManager::createTerrain()
     RenderManager::getSingletonPtr()->getSceneManager()->setAmbientLight(Ogre::ColourValue(0.2f, 0.2f, 0.2f));
 
 	mTerrainDefiner = OGRE_NEW TerrainDefiner();
-	mTerrainPageProvider = OGRE_NEW TerrainPageProvider();
+	mTerrainPageProvider = new TerrainPageProvider();
 
 	terrain_group_ = OGRE_NEW Ogre::TerrainGroup(RenderManager::getSingletonPtr()->getSceneManager(), Ogre::Terrain::ALIGN_X_Z, TERRAIN_SIZE, TERRAIN_WORLD_SIZE);
 	terrain_group_->setFilenameConvention(Ogre::String("BasicTutorial3Terrain"), Ogre::String("dat"));

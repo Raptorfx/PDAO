@@ -50,7 +50,7 @@ void RenderManager::createViewports()
 */
 void RenderManager::createScene()
 {
-	mTerrainManager_ = OGRE_NEW TerrainManager();
+	mTerrainManager_ = new TerrainManager();
 	mTerrainManager_->createTerrain();
 
 	sceneManager_->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
