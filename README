@@ -9,6 +9,11 @@ Dependencies-vc110-x64-02.11.2013
 OGRE-SDK-1.9.0-vc110-x64-02.11.2013
 plugins-vc110-x64-02.11.2013
 
+Download Googles ProtoBuf lib, already built, from here
+http://project-dao.at.vu/files/protobuf
+
+Source can be found here https://code.google.com/p/protobuf/
+
 extract them all within the deps folder
 
 Media folder can be downloaded from
@@ -18,9 +23,9 @@ http://project-dao.at.vu/media.rar
 Use CMake within PDAO and specify the build directory as output.
 Set the Paths to the depencencies for each variable in CMake
 
-In VS select as build RelWithDebInfo and build it
+In VS select as build RelWithDebInfo or Debug and build it
 
-Copy the dll's from Ogre RelWithDebInfo to the build output folder.
-Copy the ddl's from Plugins RelWithDebInfo (for MyGUI) to the build output folder
+Copy the dll's from Ogre RelWithDebInfo to the build output folder. (debug dlls to Debug folder for Debug mode)
+Copy the ddl's from Plugins RelWithDebInfo (for MyGUI) to the build output folder. (debug dlls to Debug folder for Debug mode)
 Copy media folder to build output folder
 Copy config folder from PDAO to build output folder
