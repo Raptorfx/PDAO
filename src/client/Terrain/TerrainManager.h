@@ -12,10 +12,10 @@
 #include "OGRE/Terrain/OgreTerrainPagedWorldSection.h"
 #include "OGRE/Terrain/OgreTerrainPaging.h"
 
-#define TERRAIN_PAGE_MIN_X -1
-#define TERRAIN_PAGE_MIN_Y -1
-#define TERRAIN_PAGE_MAX_X 1
-#define TERRAIN_PAGE_MAX_Y 1
+#define TERRAIN_PAGE_MIN_X -2
+#define TERRAIN_PAGE_MIN_Y -2
+#define TERRAIN_PAGE_MAX_X 2
+#define TERRAIN_PAGE_MAX_Y 2
 
 //#define TERRAIN_WORLD_SIZE 12000.0f
 //#define TERRAIN_SIZE 513
