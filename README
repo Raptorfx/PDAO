@@ -1,31 +1,24 @@
-PDAO - Project Dark Ages Online
-====
-How to build with Visual Studio 2012 (msvc110):
+# PDAO - Project Dark Ages Online
 
-Download from
-http://www.ogre3d.org/forums/viewtopic.php?t=69274
-boost-1.55-rev86545-vc110-x64-02.11.2013
-Dependencies-vc110-x64-02.11.2013
-OGRE-SDK-1.9.0-vc110-x64-02.11.2013
-plugins-vc110-x64-02.11.2013
+###Building with Visual Studio 2013
+Download from http://www.ogre3d.org/forums/viewtopic.php?t=69274
+- addons-OGRE-1.9.0-vc120-x64-13.12.2014.7z
+- boost-1.58-vc120-x64-13.12.2014.7z
+- Dependencies-vc120-x64-13.12.2014.7z
+- Dependencies-vc120-x64-13.12.2014.7z
 
-Download Googles ProtoBuf lib, already built, from here
-http://dao.efnet.at/files/protobuf/libprotobuf-2.5.0_x64.rar
+Download Googles ProtoBuf and build it.
 
-Source can be found here https://code.google.com/p/protobuf/
-
-extract them all within the deps folder
+Extract them all within the deps folder.
 
 Media folder can be downloaded from
-http://dao.efnet.at/media.rar
+--Link comming soon---
 
+Use CMake within PDAO and specify the build directory as output. Set the Paths to the depencencies for each variable in CMake. Set Addons/MyGUI as the Plugins directory. (Will be updated soon).
 
-Use CMake within PDAO and specify the build directory as output.
-Set the Paths to the depencencies for each variable in CMake
+In VS select as build Release or Debug and build it
 
-In VS select as build RelWithDebInfo or Debug and build it
-
-Copy the dll's from Ogre RelWithDebInfo to the build output folder. (debug dlls to Debug folder for Debug mode)
-Copy the ddl's from Plugins RelWithDebInfo (for MyGUI) to the build output folder. (debug dlls to Debug folder for Debug mode)
+Copy the dll's from Ogre Release to the build output folder. (debug dlls to Debug folder for Debug mode)
+Copy the ddl's from Plugins Release (for MyGUI) to the build output folder. (debug dlls to Debug folder for Debug mode)
 Copy media folder to build output folder
 Copy config folder from PDAO to build output folder

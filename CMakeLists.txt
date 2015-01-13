@@ -104,29 +104,29 @@ set(LIBNOISE_SOURCE
 IF(MSVC)
 
     #BOOST
-    
-    set(Boost_USE_STATIC_LIBS ON) 
-    set(Boost_USE_MULTITHREADED ON)  
-    set(Boost_USE_STATIC_RUNTIME OFF) 
-    find_package(Boost 1.55.0 COMPONENTS thread system) 
-    
+
+    set(Boost_USE_STATIC_LIBS ON)
+    set(Boost_USE_MULTITHREADED ON)
+    set(Boost_USE_STATIC_RUNTIME OFF)
+    find_package(Boost 1.55.0 COMPONENTS thread system date_time chrono)
+
     if(Boost_FOUND)
-        include_directories(${Boost_INCLUDE_DIRS}) 
-        set(BOOST_LIBS ${Boost_LIBRARIES})   
-        add_definitions( -DBOOST_ALL_NO_LIB )                                                                                                                                                                                                                       
+        include_directories(${Boost_INCLUDE_DIRS})
+        set(BOOST_LIBS ${Boost_LIBRARIES})
+        add_definitions( -DBOOST_ALL_NO_LIB )
     endif()
-    
+
     # OGRE SDK
-    
+
     SET(OGRE_DIR "" CACHE PATH "")
     include_directories(${OGRE_DIR}/include)
     include_directories(${OGRE_DIR}/include/OGRE)
     include_directories(${OGRE_DIR}/include/OGRE/Paging)
     include_directories(${OGRE_DIR}/include/OIS)
-    
+
     link_directories(${OGRE_DIR}/lib)
     link_directories(${OGRE_DIR}/lib/$(Configuration)/opt)
-    
+
     set(LIB_OGREMAIN debug OgreMain_d.lib optimized OgreMain.lib)
     set(LIB_OGREOVERLAY debug OgreOverlay_d.lib optimized OgreOverlay.lib)
     set(LIB_OGREPAGING debug OgrePaging_d.lib optimized OgrePaging.lib)
@@ -142,44 +142,44 @@ IF(MSVC)
     set(LIB_PLUGIN_PCZSCENEMANAGER debug Plugin_PCZSceneManager_d.lib optimized Plugin_PCZSceneManager.lib)
     set(LIB_RENDERSYSTEM_DIRECT3D9 debug RenderSystem_Direct3D9_d.lib optimized RenderSystem_Direct3D9.lib)
     set(LIB_OIS debug OIS_d.lib optimized OIS.lib)
-	
+
     # OGRE DEPENDENCIES
-    
+
     SET(OGRE_DEPENDENCY_DIR "" CACHE PATH "")
     include_directories(${OGRE_DEPENDENCY_DIR}/include)
     link_directories(${OGRE_DEPENDENCY_DIR}/lib/Debug)
     link_directories(${OGRE_DEPENDENCY_DIR}/lib/Release)
-    
-    set(LIB_FREETYPE250 debug freetype250_D.lib optimized freetype250.lib)
-  	
+
+    set(LIB_FREETYPE250 debug freetyped.lib optimized freetype.lib)
+
     # OGRE PLUGINS
-    
+
     SET(OGRE_PLUGIN_DIR "" CACHE PATH "")
   	include_directories(${OGRE_PLUGIN_DIR}/include)
   	link_directories(${OGRE_PLUGIN_DIR}/lib)
   	set(LIB_MYGUIENGINE debug MyGUIEngine_d.lib optimized MyGUIEngine.lib)
   	set(LIB_MYGUIOGREPLATFORM debug MyGUI.OgrePlatform_d.lib optimized MyGUI.OgrePlatform.lib)
-  	
+
   	# PROTOBUF
-  	
+
   	SET(PROTOBUF_DIR "" CACHE PATH "")
   	include_directories(${PROTOBUF_DIR}/include)
   	link_directories(${PROTOBUF_DIR}/lib/Debug)
   	link_directories(${PROTOBUF_DIR}/lib/Release)
   	set(LIB_PROTOBUF debug libprotobuf_d.lib optimized libprotobuf.lib)
   	set(LIB_PROTOC debug libprotoc_d.lib optimized libprotoc.lib)
-  	
+
   	# VISUAL SETTINGS
   	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
   	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP")
 
 ENDIF(MSVC)
 
-set(DAO_LIBS 
-    ${BOOST_LIBS} 
-    ${LIB_OGREMAIN} 
-    ${LIB_OGREOVERLAY} 
-    ${LIB_OGREPAGING} 
+set(DAO_LIBS
+    ${BOOST_LIBS}
+    ${LIB_OGREMAIN}
+    ${LIB_OGREOVERLAY}
+    ${LIB_OGREPAGING}
     ${LIB_OGREPROPERTY}
     ${LIB_OGRERTSHADERSYSTEM}
     ${LIB_OGRETERRAIN}
@@ -202,7 +202,7 @@ set(DAO_LIBS
 add_executable(DarkAgesOnline ${DAO_SOURCE})
 target_link_libraries(DarkAgesOnline ${DAO_LIBS})
 
-add_executable(Heightmap_Generator ${HEIGHTMAP_GENERATOR_SOURCE} ${LIBNOISE_SOURCE})       
+add_executable(Heightmap_Generator ${HEIGHTMAP_GENERATOR_SOURCE} ${LIBNOISE_SOURCE})
 target_link_libraries(Heightmap_Generator ${HEIGHTMAP_GENERATOR_LIBS})
 
 # This prints out ALL variables
